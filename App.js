@@ -8,8 +8,8 @@ import Profile from './screens/Profile';
 export default function App() {
   return (
     // <Home/>
-    // <CreateEmployy/>
-    <Profile/>
+    <CreateEmployy/>
+    //<Profile/>
   );
 }
 
