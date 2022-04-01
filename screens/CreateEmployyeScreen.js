@@ -1,10 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View,PermissionsAndroid } from "react-native";
+import { StyleSheet, Text, View,PermissionsAndroid,TouchableNativeFeedback } from "react-native";
 import { Button, Modal, TextInput } from "react-native-paper";
 import { Keyboard } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from "expo-permissions";
 
 const CreateEmployy = () => {
   const [Name, setName] = React.useState("");
@@ -14,7 +13,11 @@ const CreateEmployy = () => {
   const [modal, setModal] = React.useState(false);
   const showModal = () =>{ setModal(true); Keyboard.dismiss();}
   const hideModal = () => setModal(false);
+  const hideKeyboard= ()=>{Keyboard.dismiss();}
   const containerStyle = { backgroundColor: "white", padding: 20 };
+  const [rippleColor, setRippleColor] = React.useState("#fff");
+  const [rippleOverflow, setRippleOverflow] = React.useState(false);
+  
   //get image 
   const pickImageFromGallery = async () => {
     // No permissions request is necessary for launching the image library
@@ -63,13 +66,19 @@ const CreateEmployy = () => {
   };
   
   return (
-    <View style={styles.root}>
+    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(rippleColor, rippleOverflow)} onPress = {()=>{ 
+       setRippleColor("#fff");
+       setRippleOverflow(!rippleOverflow);
+      hideKeyboard();
+      } }>
+    <View style={styles.root} >
       <TextInput
         label={"name"}
         theme={theme}
         mode={"outlined"}
         style={styles.input}
         value={Name}
+        onPressIn={hideModal}
         onChangeText={(text) => setName(text)}
       />
       <TextInput
@@ -78,9 +87,11 @@ const CreateEmployy = () => {
         keyboardType="number-pad"
         style={styles.input}
         value={phone}
+        onPressIn={hideModal}
         onChangeText={(text) => setPhone(text)}
       />
       <TextInput
+      onPressIn={hideModal}
         label={"email"}
         mode={"outlined"}
         style={styles.input}
@@ -88,6 +99,7 @@ const CreateEmployy = () => {
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
+      onPressIn={hideModal}
         label={"salary"}
         mode={"outlined"}
         keyboardType="number-pad"
@@ -125,6 +137,7 @@ const CreateEmployy = () => {
       </Modal>
       
     </View>
+    </TouchableNativeFeedback>
   );
 };
 
@@ -136,6 +149,7 @@ const theme = {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    backgroundColor:"#fff"
   },
   input: {
     margin: 5,
