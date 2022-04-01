@@ -4,13 +4,13 @@ import { StyleSheet, Text, View,Image,FlatList } from 'react-native';
 const url="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=699&q=80";
 const data=[
     {
-        id:1,name:'sang',postion:"Mobile developer"
+        id:1,name:'sang',postion:"Mobile developer",salary:"5 USD",phone:"123",picture:url,email:"sang@gmail.com"
     },
     {
-        id:2,name:'huy',postion:"Mobile developer"
+        id:2,name:'huy',postion:"Mobile developer",salary:"3 USD",phone:"123",picture:url,email:"sang@gmail.com"
     },
     {
-        id:3,name:'hoang',postion:"Mobile developer"
+        id:3,name:'hoang',postion:"Mobile developer",salary:"4 USD",phone:"123",picture:url,email:"sang@gmail.com"
     }
 ]
 
@@ -34,7 +34,7 @@ const Home =(props) =>{
 
     const renderFlatlist=((item)=>{
         return (
-            <Card style={styles.mycard} key={item.id} onPress={()=> props.navigation.navigate("profile")}>
+            <Card style={styles.mycard} key={item.id} onPress={()=> props.navigation.navigate("profile",{item})}>
                 <View style={styles.cardview}>
                 <Image 
                 style={{width:60,height:60,borderRadius:50}}
