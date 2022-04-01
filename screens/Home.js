@@ -14,7 +14,7 @@ const data=[
     }
 ]
 
-const Home =() =>{
+const Home =(props) =>{
     const renderlist=data.map((item)=>{
         return(
                 <Card style={styles.mycard}>
@@ -34,7 +34,7 @@ const Home =() =>{
 
     const renderFlatlist=((item)=>{
         return (
-            <Card style={styles.mycard} key={item.id}>
+            <Card style={styles.mycard} key={item.id} onPress={()=> props.navigation.navigate("profile")}>
                 <View style={styles.cardview}>
                 <Image 
                 style={{width:60,height:60,borderRadius:50}}
@@ -58,7 +58,7 @@ const Home =() =>{
                 }}
                 keyExtractor={item=>`${item.id}`}
                 />
-            <FAB style={styles.fab} icon="plus" small onPress={() => console.log('Pressed')}/>
+            <FAB style={styles.fab} icon="plus" small onPress={() => props.navigation.navigate("CreateUser")}/>
 
         </View>
     )
