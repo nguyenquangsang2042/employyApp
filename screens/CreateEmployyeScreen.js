@@ -1,8 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,PermissionsAndroid } from "react-native";
 import { Button, Modal, TextInput } from "react-native-paper";
 import { Keyboard } from "react-native";
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from "expo-permissions";
 
 const CreateEmployy = () => {
   const [Name, setName] = React.useState("");
@@ -13,6 +15,53 @@ const CreateEmployy = () => {
   const showModal = () =>{ setModal(true); Keyboard.dismiss();}
   const hideModal = () => setModal(false);
   const containerStyle = { backgroundColor: "white", padding: 20 };
+  //get image 
+  const pickImageFromGallery = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    console.log(result);
+  }
+  const pickImageFromCamera = async () => {
+    
+      let result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      console.log(result);
+   
+  }
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: "Cool Photo App Camera Permission",
+          message:
+            "Cool Photo App needs access to your camera " +
+            "so you can take awesome pictures.",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK"
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("You can use the camera");
+        pickImageFromCamera();
+      } else {
+        console.log("Camera permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+  
   return (
     <View style={styles.root}>
       <TextInput
@@ -62,10 +111,10 @@ const CreateEmployy = () => {
       >
         <View style={styles.modalView}>
           <View style={styles.modalButtonView}>
-          <Button icon="image-area" mode="contained" onPress={showModal}>
+          <Button icon="image-area" mode="contained" onPress={pickImageFromGallery}>
           upload Image
         </Button>
-        <Button icon="camera" mode="contained" onPress={showModal}>
+        <Button icon="camera" mode="contained" onPress={requestCameraPermission}>
           Take a picture
         </Button>
           </View>

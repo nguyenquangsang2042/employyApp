@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useEffect} from 'react';
+import { StyleSheet, Text, View,PermissionsAndroid } from 'react-native';
 import CreateEmployy from './screens/CreateEmployyeScreen';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Title } from 'react-native-paper';
+
+
 
 const Stack= createNativeStackNavigator();
 const mycustomOptionsHeader={
@@ -17,7 +19,6 @@ const mycustomOptionsHeader={
   }
 }
 export default function App() {
-  
   return (
     <NavigationContainer >
       <Stack.Navigator initialRouteName='Home' >
