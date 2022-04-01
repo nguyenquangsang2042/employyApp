@@ -1,10 +1,20 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { StyleSheet, Image, Text, View } from "react-native";
+import { StyleSheet, Image, Text, View,Linking,Platform } from "react-native";
 import { Button, Card, Title } from "react-native-paper";
 import { clearErrors } from "react-native/Libraries/LogBox/Data/LogBoxData";
 const Profile = () => {
+  const openDial=()=>{
+    if(Platform.OS==="android")
+    {
+      Linking.openURL("tel:123")
+    }
+    else if(Platform.OS==="ios")
+    {
+      Linking.openURL("telprompt:456")
+    }
+  }
   return (
     <View style={styles.root}>
       <LinearGradient
@@ -23,13 +33,13 @@ const Profile = () => {
         <Title>Nguyễn Quang Sáng</Title>
         <Text>Mobile Developer</Text>
       </View>
-      <Card style={styles.mycard}>
+      <Card style={styles.mycard} onPress={()=>{Linking.openURL("mailto:someone@gmail.com")}}>
         <View style={styles.cardContent}>
           <MaterialIcons name="email" size={32} color="red" />
           <Text style={styles.mytext}>nguyenquangsang2042@gmail.com</Text>
         </View>
       </Card>
-      <Card style={styles.mycard}>
+      <Card style={styles.mycard} onPress={()=>openDial()}>
         <View style={styles.cardContent}>
           <MaterialIcons name="phone" size={32} color="blue" />
           <Text style={styles.mytext}>123</Text>
