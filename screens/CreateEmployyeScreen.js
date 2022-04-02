@@ -37,7 +37,13 @@ const CreateEmployy = () => {
         aspect: [4, 3],
         quality: 1,
       });
-      console.log(result);
+      if(!result.cancelled)
+      {
+        let newfile={uri:result.uri,
+          type:`test/${data.uri.split(".")[1]}`,
+          name:`test.${data.uri.split(".")[1]}`}
+        handelUpload(newfile)
+      }
    
   }
   const requestCameraPermission = async () => {
@@ -64,7 +70,19 @@ const CreateEmployy = () => {
       console.warn(err);
     }
   };
-  
+  const handelUpload = (image) =>
+  {
+    const data= new FormData();
+    data.append('file',image);
+    data.append('upload_preset','employyApp_ReactNative');
+    data.append('cloud_name','sangnq2903');
+
+    fetch("cloudinary://764798321816251:yknId5HJl_Gpf-7VyqDLa8cXd7w@sangnq2903",
+    {
+      method:"post",
+      body:data
+    }).then(res=>res.json()).then(data=>{console.log(data)})
+  }
   return (
     <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(rippleColor, rippleOverflow)} onPress = {()=>{ 
        setRippleColor("#fff");
