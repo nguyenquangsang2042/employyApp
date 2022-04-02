@@ -27,8 +27,13 @@ const CreateEmployy = () => {
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
-  }
+    if(!result.cancelled)
+    {
+      let newfile={uri:result.uri,
+        type:`test/${result.uri.split(".")[1]}`,
+        name:`test.${result.uri.split(".")[1]}`}
+      handelUpload(newfile)
+    }  }
   const pickImageFromCamera = async () => {
     
       let result = await ImagePicker.launchCameraAsync({
@@ -40,8 +45,8 @@ const CreateEmployy = () => {
       if(!result.cancelled)
       {
         let newfile={uri:result.uri,
-          type:`test/${data.uri.split(".")[1]}`,
-          name:`test.${data.uri.split(".")[1]}`}
+          type:`test/${result.uri.split(".")[1]}`,
+          name:`test.${result.uri.split(".")[1]}`}
         handelUpload(newfile)
       }
    
@@ -77,7 +82,7 @@ const CreateEmployy = () => {
     data.append('upload_preset','employyApp_ReactNative');
     data.append('cloud_name','sangnq2903');
 
-    fetch("cloudinary://764798321816251:yknId5HJl_Gpf-7VyqDLa8cXd7w@sangnq2903",
+    fetch("https://api.cloudinary.com/v1_1/sangnq2903/image/upload",
     {
       method:"post",
       body:data
