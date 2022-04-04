@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.employyapp">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.sangnq2903.employyapp">
 
   <uses-permission android:name="android.permission.INTERNET"/>
   <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
