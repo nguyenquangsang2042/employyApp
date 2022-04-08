@@ -1,12 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React,{useEffect} from 'react';
-import { StyleSheet, Text, View,PermissionsAndroid } from 'react-native';
 import CreateEmployy from './screens/CreateEmployyeScreen';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { Title } from 'react-native-paper';
 
 
 

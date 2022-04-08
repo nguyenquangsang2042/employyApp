@@ -4,6 +4,8 @@ import { StyleSheet, Text, View,PermissionsAndroid,TouchableNativeFeedback } fro
 import { Button, Modal, TextInput } from "react-native-paper";
 import { Keyboard } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
+import { Platform } from "expo-modules-core";
+import * as Permissions from 'expo-permissions';
 
 const CreateEmployy = () => {
   const [Name, setName] = React.useState("");
@@ -36,6 +38,26 @@ const CreateEmployy = () => {
     }  }
   const pickImageFromCamera = async () => {
     
+    const permission = await Permissions.getAsync(Permissions.CAMERA);
+    if (permission.status !== 'granted') {
+        const newPermission = await Permissions.askAsync(Permissions.CAMERA);
+        if (newPermission.status === 'granted') {
+          //its granted.
+          let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          if(!result.cancelled)
+          {
+            let newfile={uri:result.uri,
+              type:`test/${result.uri.split(".")[1]}`,
+              name:`test.${result.uri.split(".")[1]}`}
+            handelUpload(newfile)
+          }
+        }
+    } else {
       let result = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
@@ -49,32 +71,8 @@ const CreateEmployy = () => {
           name:`test.${result.uri.split(".")[1]}`}
         handelUpload(newfile)
       }
-   
-  }
-  const requestCameraPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: "Cool Photo App Camera Permission",
-          message:
-            "Cool Photo App needs access to your camera " +
-            "so you can take awesome pictures.",
-          buttonNeutral: "Ask Me Later",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK"
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the camera");
-        pickImageFromCamera();
-      } else {
-        console.log("Camera permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
     }
-  };
+  }
   const handelUpload = (image) =>
   {
     const data= new FormData();
@@ -149,7 +147,7 @@ const CreateEmployy = () => {
           <Button icon="image-area" mode="contained" onPress={pickImageFromGallery}>
           upload Image
         </Button>
-        <Button icon="camera" mode="contained" onPress={requestCameraPermission}>
+        <Button icon="camera" mode="contained" onPress={pickImageFromCamera}>
           Take a picture
         </Button>
           </View>
