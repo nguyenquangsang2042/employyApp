@@ -22,5 +22,5 @@ app.get('/',(req,res)=>{
     res.send("welcomto node js")
 })
 app.listen(3000,()=>{
-    console.log("server running")
+    console.log("server running");
 })
