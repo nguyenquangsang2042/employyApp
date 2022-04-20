@@ -7,7 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import 'react-native-reanimated';
-import { StyleSheet, Image, Text, View,Linking,Platform } from "react-native";
+import { StyleSheet, Image, Text, View,Linking,Platform ,Picker} from "react-native";
 const url="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=699&q=80";
 
 const Drawer = createDrawerNavigator();
@@ -22,10 +22,15 @@ function CustomDrawerContent(props) {
             uri: url
           }}
         /> 
-        <Text style={{justifyContent:'center',alignItems:'center'}}>nguyen quang sang</Text>
+        <Text style={{marginTop:15,marginLeft:10}}>nguyen quang sang</Text>
    </View>
 
-   <Text>absbb</Text>
+   <Picker
+        style={{ height: 50}}
+      >
+        <Picker.Item  label="TCT" value="java" />
+        <Picker.Item label="DV" value="js" />
+      </Picker>
       <DrawerItem icon={({ focused, color, size }) => (
   <Image
     source={{ uri: 'https://reactjs.org/logo-og.png' }}
@@ -40,7 +45,14 @@ function CustomDrawerContent(props) {
     resizeMode='stretch'
   />
 )}  label={'Thông báo'} onPress={()=>props.navigation.navigate('')}/>
+      <View style={{flexDirection:'row'}}>
+      <Image
+    source={{ uri: 'https://reactjs.org/logo-og.png' }}
+    style={{ height: 30, width: 30 }}
+    resizeMode='stretch'
+  />
       <Text style={styles.title}>Văn bản đến</Text>
+      </View>
       <DrawerItem icon={({ focused, color, size }) => (
   <Image
     source={{ uri: 'https://reactjs.org/logo-og.png' }}
@@ -76,7 +88,14 @@ function CustomDrawerContent(props) {
     resizeMode='stretch'
   />
 )} l label={'Tất cả'} onPress={()=>props.navigation.navigate('')}/>
-      <Text style={styles.title}>Văn bản di</Text>
+         <View style={{flexDirection:'row'}}>
+      <Image
+    source={{ uri: 'https://reactjs.org/logo-og.png' }}
+    style={{ height: 30, width: 30 }}
+    resizeMode='stretch'
+  />
+      <Text style={styles.title}>Văn bản đi</Text>
+      </View>
       <DrawerItem icon={({ focused, color, size }) => (
   <Image
     source={{ uri: 'https://reactjs.org/logo-og.png' }}
@@ -112,7 +131,14 @@ function CustomDrawerContent(props) {
     resizeMode='stretch'
   />
 )} label={'Tất cả'} onPress={()=>props.navigation.navigate('')}/>
+         <View style={{flexDirection:'row'}}>
+      <Image
+    source={{ uri: 'https://reactjs.org/logo-og.png' }}
+    style={{ height: 30, width: 30 }}
+    resizeMode='stretch'
+  />
       <Text style={styles.logout}>Đăng xuất</Text>
+      </View>
     </DrawerContentScrollView>
   );
 }
@@ -140,10 +166,13 @@ const styles=StyleSheet.create({
     color:'#000',
     fontSize:18,
     textTransform:'uppercase',
+    marginLeft:5
 
   },
   logout:{
-    color:'#07e3eb'
+    color:'#07e3eb',
+    marginLeft:5,
+    marginTop:5
   }
 });
 export default function App() {
