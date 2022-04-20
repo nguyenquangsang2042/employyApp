@@ -19,7 +19,7 @@ function CustomDrawerContent(props) {
 function MyDrawer() {
   return (
     <Drawer.Navigator useLegacyImplementation={false} drawerContent={props=><CustomDrawerContent{...props}/>}>
-      <Drawer.Screen name="Feed" component={Home} />
+      <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="CreateUser" component={CreateEmployy} />
       <Drawer.Screen name="profile" component={Profile} />
     </Drawer.Navigator>
