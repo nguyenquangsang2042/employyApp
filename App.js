@@ -22,7 +22,10 @@ function CustomDrawerContent(props) {
             uri: url
           }}
         /> 
+        <View style={{flexDirection:'column'}}>
         <Text style={{marginTop:15,marginLeft:10}}>nguyen quang sang</Text>
+        <Text style={{marginLeft:10}}>IT</Text>
+        </View>
    </View>
 
    <Picker
@@ -170,7 +173,7 @@ const styles=StyleSheet.create({
 
   },
   logout:{
-    color:'#07e3eb',
+    color:'#0072C6',
     marginLeft:5,
     marginTop:5
   }
